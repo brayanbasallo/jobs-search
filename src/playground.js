@@ -5,4 +5,6 @@ export const eventOrOdd = (num) => {
     return 'odd';
 }
 
-
+export const multiply = (a, b) => {
+    return a * b;
+}

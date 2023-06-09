@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { eventOrOdd } from "@/playground";
+import { eventOrOdd, multiply } from "@/playground";
 
 describe("basic math", () => {
     it("add two numbers", () => {
@@ -16,6 +16,12 @@ describe("basic math", () => {
             it("indicates the number is odd", () => {
                 expect(eventOrOdd(3)).toBe("odd");
             });
+        });
+    });
+
+    describe("multiply", () => {
+        it("multiplies two numbers", () => {
+            expect(multiply(2, 3)).toBe(6);
         });
     });
 });
