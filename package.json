@@ -7,6 +7,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "test:unit": "vitest",
+    "coverage": "vitest run --coverage",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
     "format": "prettier --write src/"
   },
@@ -16,6 +17,7 @@
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.2.0",
     "@vitejs/plugin-vue": "^4.2.3",
+    "@vitest/coverage-c8": "^0.32.0",
     "@vue/eslint-config-prettier": "^7.1.0",
     "@vue/test-utils": "^2.3.2",
     "autoprefixer": "^10.4.14",
