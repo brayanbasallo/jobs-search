@@ -1,4 +1,3 @@
-import { describe, it, expect } from "vitest";
 import { eventOrOdd, multiply } from "@/playground";
 
 describe("basic math", () => {
