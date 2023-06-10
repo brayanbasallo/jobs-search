@@ -22,8 +22,6 @@ describe('MainNav', () => {
             "How we hire",
             "Students",
             "Jobs"
-        ])
-        
-        
+        ])        
     })
 })
