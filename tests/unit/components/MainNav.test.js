@@ -9,4 +9,21 @@ describe('MainNav', () => {
         const companyName = screen.getByText('Bobo Careers')
         expect(companyName).toBeInTheDocument()
     })
+    it("displays menu items fot navegations", () => {
+        render(MainNav)
+        const navegationMenuItems = screen.getAllByRole("listitem")
+        const navegationMenuItemsText = navegationMenuItems.map(
+            (item) => item.textContent
+        );
+        expect(navegationMenuItemsText).toEqual([
+            "Teams",
+            "Location",
+            "Life at Bobo careers",
+            "How we hire",
+            "Students",
+            "Jobs"
+        ])
+        
+        
+    })
 })
