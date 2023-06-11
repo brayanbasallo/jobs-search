@@ -1,5 +1,5 @@
 <template>
-  <img :src="imageLink" alt="profile image" class="rounded-3xl w-8 h-8 object-contain" />
+  <img :src="imageLink" alt="user profile image" class="rounded-3xl w-8 h-8 object-contain" />
 </template>
 <script>
 export default {
