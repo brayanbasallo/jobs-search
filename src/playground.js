@@ -15,3 +15,10 @@ export const multiply = (a, b) =>  a * b;
 // const names = ['Andrew', 'Jen', 'Jess'];
 // const lowercaseNames = names.map((name) => name.toLowerCase());
 // console.log(lowercaseNames);
+
+// dinamic object keys
+/* const favoriteFood = 'pizza';
+const goodFoods = {
+    [favoriteFood]: true,
+}
+console.log(goodFoods); */
