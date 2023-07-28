@@ -5,13 +5,25 @@ import MainNav from '@/components/MainNav.vue'
 
 describe('MainNav', () => {
     it('display company name', () => {
-        render(MainNav)
+        render(MainNav, {
+            global: {
+                stubs: {
+                    FontAwesomeIcon: true
+                }
+            },
+        })
         //screen.debug() // uncomment to see the rendered HTML
         const companyName = screen.getByText('Bobo Careers')
         expect(companyName).toBeInTheDocument()
     })
     it("displays menu items fot navegations", () => {
-        render(MainNav)
+        render(MainNav, {
+            global: {
+                stubs: {
+                    FontAwesomeIcon: true
+                }
+            },
+        })
         const navegationMenuItems = screen.getAllByRole("listitem")
         const navegationMenuItemsText = navegationMenuItems.map(
             (item) => item.textContent
@@ -28,7 +40,13 @@ describe('MainNav', () => {
 
     describe("When the user logs in", () => {
         it("displays the profile picture", async () => {
-            render(MainNav)
+            render(MainNav, {
+                global: {
+                stubs: {
+                    FontAwesomeIcon: true
+                }
+            },
+            })
             let profileImage = screen.queryByRole("img", {
                 name: /user profile image/i, // use a regex to match the alt text
             })

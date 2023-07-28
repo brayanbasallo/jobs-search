@@ -17,7 +17,7 @@
           <action-button v-else text="sing in" type="primary" @click="logginUser"  />
         </div>
       </div>
-      <the-subnav />
+      <the-subnav v-if="isLoggedIn" />
     </div>
   </header>
 </template>
