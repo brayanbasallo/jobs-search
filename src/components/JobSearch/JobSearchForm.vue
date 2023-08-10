@@ -4,28 +4,18 @@
         <div class="flex flex-1 flex-nowrap h-full text-base font-light">
             <div class="flex h-full flex-1 relative items-center pr-3">
                 <label for="role" class="absolute left-0 -top-10">Role</label>
-                <input 
-                    id="role" 
-                    v-model="role"
-                    type="text" 
-                    name="role" 
-                    placeholder="Sofware engineer" 
-                    class="w-full font-normal focus:outline-none" 
-                />
+                <text-input
+                v-model="role" 
+                placeholder="Frontend Developer" />
             </div>
             <span class="flex items-center h-full border-l border-r border-brand-gray-3 bg-brand-gray-2 px-3">
                 in
             </span>
             <div class="flex h-full flex-1 relative items-center pl-3">
                 <label for="location" class="absolute left-0 -top-10">where?</label>
-                <input 
-                    id="location"
-                    v-model="location"
-                    type="text" 
-                    name="location" 
-                    placeholder="Los angeles" 
-                    class="w-full font-normal focus:outline-none" 
-                />
+                <text-input 
+                v-model="location" 
+                placeholder="London" />
             </div>
         </div>
         <ActionButton text="Search" type="secondary" class="rounded-r-3xl" />
@@ -33,16 +23,19 @@
 </template>
 <script>
 import ActionButton from '@/components/Shared/ActionButton.vue';
+import TextInput from '@/components/Shared/TextInput.vue';
+
 export default {
     name: 'JobSearchForm',
     components: {
-        ActionButton
+        ActionButton,
+        TextInput
     },
     data() {
         return {
             role: '',
             location: ''
         }
-    },
+    }
 }
 </script>

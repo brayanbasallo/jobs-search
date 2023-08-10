@@ -34,7 +34,7 @@ export default {
     methods: {
         changeTitle() {
             this.interval = setInterval(() => {
-                const actions = ['Build', 'Create', 'Design', 'Code', 'Join'];
+                const actions = ['Build', 'Create', 'Design', 'Code'];
                 this.action = nextElementInList(actions, this.action)
             }, 3000)
         }
