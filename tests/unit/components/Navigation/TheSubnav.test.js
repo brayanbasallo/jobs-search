@@ -8,24 +8,25 @@ describe('TheSubnav', () => {
      * required data to render TheSubnav component
      * @param {Object} data 
      */
-    const renderTheSubnav = (data) => {
+    const renderTheSubnav = ($route) => {
         render(TheSubnav, {
             global: {
                 stubs: {
                     FontAwesomeIcon: true
+                },
+                mocks: {
+                    $route
                 }
-            },
-            data() {
-                return data
             }
         })
     }
 
     describe('when user is on jobs page', () =>{
         it('display job acount', () => {
-            renderTheSubnav({
-                onJobResultsPage: true
-            })
+            const $route = {
+                name: "JobResults"
+            }
+            renderTheSubnav($route)
 
             const jobCount = screen.queryByText('1653')
 
@@ -35,9 +36,10 @@ describe('TheSubnav', () => {
     })
     describe('when user is not on jobs page', () =>{
         it('display job acount', () => {
-            renderTheSubnav({
-                onJobResultsPage: false
-            })
+            const $route = {
+                name: "Home"
+            }
+            renderTheSubnav($route)
 
             const jobCount = screen.queryByText('1653')
 
