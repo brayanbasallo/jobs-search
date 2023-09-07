@@ -35,7 +35,7 @@ describe('TheSubnav', () => {
         })
     })
     describe('when user is not on jobs page', () =>{
-        it('display job acount ', () => {
+        it('display job acount', () => {
             const $route = {
                 name: "Home"
             }
