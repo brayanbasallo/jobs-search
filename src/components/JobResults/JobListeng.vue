@@ -1,16 +1,23 @@
 <template>
      <li class="mb-7">
-        <router-link to="/jobs/tesults/1" class="mx-auto block border border-solid border-brand-gray-2 bg-white hover:shadow-gray">
+        <router-link :to="jobPageLink" class="mx-auto block border border-solid border-brand-gray-2 bg-white hover:shadow-gray">
             <div class="mx-8 border-b border-solid border-brand-gray-2 pt-5 pb-2">
                 <h2 class="mb-2 text-2xl">
-                    Technical Support Engineer
+                   {{ job.title }}
                 </h2>
                 <div class="flex flex-row align-middle">
                     <div class="mr-5">
-                        <span>Bobo</span>
+                        <span>{{ job.organization }}</span>
                     </div>
                     <div class="">
-                        <span>San Francisco</span>
+                       <ul>
+                            <li
+                            v-for="location in job.locations" 
+                            :key="location" 
+                            class="mr-5 inline-block">
+                                {{ location }}
+                            </li>
+                       </ul>
                     </div>
                 </div>
             </div>
@@ -19,18 +26,17 @@
                     <h3 class="mt-1 mb-2">Qualifications</h3>
                     <div>
                         <ul class="list-disc pl-8">
-                            <li>Bacherlor's degree or equivalent practical experience</li>
-                            <li>5 years of experience in program management</li>
-                            <li>
-                                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro ducimus odio 
-                                accusantium id! Mollitia nesciunt recusandae, nulla magnam optio fugit earum 
-                                officiis officia quam culpa nam laboriosam perspiciatis asperiores reiciendis!
+                            <li 
+                            v-for="qualifications in job.minimumQualifications"
+                            :key="qualifications"
+                            >
+                                {{ qualifications }}
                             </li>
                         </ul>
                     </div>
                 </div>
                 <div class="mt-2 text-center">
-                    <router-link class="text-brand-blue-1" to="/jobs/results/1">
+                    <router-link class="text-brand-blue-1" :to="jobPageLink">
                         Expand
                     </router-link>
                 </div>
@@ -41,5 +47,16 @@
 <script>
 export default {
     name: "JobListings",
+    props: {
+        job: {
+            type: Object,
+            required: true
+        }
+    },
+    computed: {
+        jobPageLink() {
+            return `/jobs/results/${this.job.id}`
+        }
+    }
 }
 </script>
