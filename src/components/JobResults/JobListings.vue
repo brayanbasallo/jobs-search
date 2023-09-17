@@ -10,6 +10,7 @@
         <div class="flex items-center justify-center">
           <router-link
             v-if="previosPage"
+            role="link"
             :to="{ name: 'JobResults', query: { page: previosPage } }"
             class="mx-3 text-sm font-semibold text-brand-blue-1"
           >
