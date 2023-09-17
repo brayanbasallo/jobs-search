@@ -10,7 +10,7 @@ on:
     branches: [ "main" ]
 
 env:
-  VITE_APP_API_URL=http://test.mirealapi.com
+  VITE_APP_API_URL: http://test.mirealapi.com
 
 jobs:
   build:
