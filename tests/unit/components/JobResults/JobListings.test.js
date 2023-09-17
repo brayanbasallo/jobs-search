@@ -31,7 +31,7 @@ describe('JobListings.vue', () => {
     axios.get.mockReturnValue({ data: [] })
     const $route = createRoute()
     renderJobListings($route)
-    expect(axios.get).toHaveBeenCalledWith('http://localhost:3000/jobs')
+    expect(axios.get).toHaveBeenCalledWith('http://test.mirealapi.com/jobs')
   })
 
   it('display maximum of 10 jobs', async () => {
