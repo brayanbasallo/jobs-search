@@ -41,4 +41,49 @@ describe('JobListings.vue', () => {
     const jobListings = await screen.findAllByRole('listitem')
     expect(jobListings).toHaveLength(10)
   })
+
+  describe('when params exclude page number', () => {
+    it('displays page number 1', () => {
+      const queryParams = { page: undefined }
+      const $route = createRoute(queryParams)
+      renderJobListings($route)
+
+      expect(screen.getByText(/page 1/i)).toBeInTheDocument()
+    })
+
+    it('when params include page number', () => {
+      const queryParams = { page: '3' }
+      const $route = createRoute(queryParams)
+      renderJobListings($route)
+
+      expect(screen.getByText(/page 3/i)).toBeInTheDocument()
+    })
+  })
+
+  describe('when the user is on the first page', () => {
+    it('not show the previous page button', async () => {
+      axios.get.mockReturnValue({ data: Array(15).fill({}) })
+      const queryParams = { page: '1' }
+      const $route = createRoute(queryParams)
+
+      renderJobListings($route)
+
+      await screen.findAllByRole('listitem')
+
+      const previousLink = screen.queryByRole('link', { name: /previous page/i })
+      expect(previousLink).not.toBeInTheDocument()
+    })
+
+    it.only('show the next page button', async () => {
+      axios.get.mockReturnValue({ data: Array(15).fill({}) })
+      const queryParams = { page: '1' }
+      const $route = createRoute(queryParams)
+
+      renderJobListings($route)
+
+      await screen.findAllByRole('listitem')
+      const nextLink = screen.queryByRole('link', { name: /next/i })
+      expect(nextLink).toBeInTheDocument()
+    })
+  })
 })
