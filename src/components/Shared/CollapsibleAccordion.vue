@@ -1,11 +1,11 @@
 <template>
   <div class="border-b border-solid border-brand-gray-2 py-5">
     <div class="flex flex-wrap items-center justify-between cursor-pointer" @click="toggleAccordion">
-      <h3 class="text-base font-semibold">Organization</h3>
+      <h3 class="text-base font-semibold">{{ header }}</h3>
       <font-awesome-icon :icon="caretIcon"></font-awesome-icon>
     </div>
     <div v-if="isOpen" class="mt-5 w-full">
-      child
+        <slot></slot>
     </div>
   </div>
 </template>
@@ -13,6 +13,12 @@
 <script>
 export default {
   name: 'CollapsibleAccordion',
+  props: {
+    header: {
+      type: String,
+      required: true
+    }
+  },
   data() {
     return {
       isOpen: false
