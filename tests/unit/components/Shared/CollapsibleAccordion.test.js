@@ -23,4 +23,23 @@ describe("CollapsibleAccordion.vue",  () => {
         await userEvent.click(button);
         expect(screen.queryByText("My nested child")).toBeInTheDocument();
     });
+
+    describe("when parent does not provide custom child content", () => {
+        it("renders default content", async () => {
+            render(CollapsibleAccordion, {
+                global: {
+                    stubs: {
+                        FontAwesomeIcon: true,
+                    }
+                },
+                props: {
+                    header: "My category",
+                },
+            });
+
+            const button = screen.getByRole("button", { name: "My category" });
+            await userEvent.click(button);
+            expect(screen.queryByText("Opps! No content provided.")).toBeInTheDocument();
+        })
+    })
 });
