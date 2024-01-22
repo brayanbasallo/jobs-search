@@ -1,7 +1,11 @@
 <template>
   <ul>
     <li v-for="spotLight in spothLights" :key="spotLight.id">
-        <slot :spotlight="spotLight"></slot>
+      <slot
+        :img="spotLight.img"
+        :title="spotLight.title"
+        :description="spotLight.description"
+      ></slot>
     </li>
   </ul>
 </template>
@@ -20,7 +24,7 @@ export default {
     const basUrl = import.meta.env.VITE_APP_API_URL
     const url = `${basUrl}/spotlights`
     const response = await axios.get(url)
-    console.log(response.data);
+    console.log(response.data)
     this.spothLights = response.data
   }
 }
