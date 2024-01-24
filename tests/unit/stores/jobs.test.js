@@ -31,3 +31,21 @@ describe('actions', () => {
     })
   })
 })
+
+describe('getters', () => {
+  beforeEach(() => {
+    setActivePinia(createPinia())
+  })
+
+  describe('UNIQUE_ORGANIZATIONS', () => {
+    it('returns unique organizations from list of jobs', () => {
+      const store = useJobsStore()
+      store.jobs = [
+        { organization: 'org 1' },
+        { organization: 'org 2' },
+        { organization: 'org 1' }
+      ]
+      expect(store.UNIQUE_ORGANIZATIONS).toEqual(new Set(['org 1', 'org 2']))
+    })
+  })
+})
