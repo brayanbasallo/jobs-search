@@ -11,6 +11,11 @@ describe("State", () => {
         const store = useUserStore();
         expect(store.isLoggedIn).toBe(false);
     });
+
+    it("stores organizations that the user would like to filter jobs by", () => {
+        const store = useUserStore();
+        expect(store.selectedOrganizations).toEqual([]);
+    })
 });
 
 describe("Actions", () => {
@@ -30,4 +35,12 @@ describe("Actions", () => {
             expect(store.isLoggedIn).toBe(false);
         });
     });
+
+describe("ADD_SELECTED_ORGANIZATION", () => {
+    it("updates organizations the user has chosen to filter jobs by", () => {
+        const store = useUserStore();
+        store.ADD_SELECTED_ORGANIZATION(["Org 1", "Org 2"]);
+        expect(store.selectedOrganizations).toEqual(["Org 1", "Org 2"]);
+    });
+});
 });
