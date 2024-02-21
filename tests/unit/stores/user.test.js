@@ -16,6 +16,11 @@ describe("State", () => {
         const store = useUserStore();
         expect(store.selectedOrganizations).toEqual([]);
     })
+
+    it("stores job types that the user would like to filter jobs by", () => {
+        const store = useUserStore();
+        expect(store.selectedJobTypes).toEqual([]);
+    });
 });
 
 describe("Actions", () => {
@@ -41,6 +46,14 @@ describe("ADD_SELECTED_ORGANIZATION", () => {
         const store = useUserStore();
         store.ADD_SELECTED_ORGANIZATION(["Org 1", "Org 2"]);
         expect(store.selectedOrganizations).toEqual(["Org 1", "Org 2"]);
+    });
+});
+
+describe("ADD_SELECTED_JOB_TYPES", () => {
+    it("updates job types the user has chosen to filter jobs by", () => {
+        const store = useUserStore();
+        store.ADD_SELECTED_JOB_TYPES(["Full Time", "Part Time"]);
+        expect(store.selectedJobTypes).toEqual(["Full Time", "Part Time"]);
     });
 });
 });
