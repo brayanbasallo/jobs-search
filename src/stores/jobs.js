@@ -6,8 +6,6 @@ export const FETCH_JOBS = 'FETCH_JOBS'
 export const UNIQUE_ORGANIZATIONS = 'UNIQUE_ORGANIZATIONS'
 export const UNIQUE_JOB_TYPES = 'UNIQUE_JOB_TYPES'
 export const FILTERED_JOBS = 'FILTERED_JOBS'
-export const FILTER_JOBS_BY_ORGANIZATION = 'FILTER_JOBS_BY_ORGANIZATION'
-export const FILTER_JOBS_BY_BY_JOB_TYPES = 'FILTER_JOBS_BY_BY_JOB_TYPES'
 
 export const INCLUDE_JOB_BY_ORGANIZATION = 'INCLUDE_JOB_BY_ORGANIZATION'
 export const INCLUDE_JOB_BY_JOB_TYPE = 'INCLUDE_JOB_BY_JOB_TYPE'
@@ -31,20 +29,6 @@ export const useJobsStore = defineStore('jobs', {
       const uniqueJobTypes = new Set()
       state.jobs.forEach((job) => uniqueJobTypes.add(job.jobType))
       return uniqueJobTypes;
-    },
-    [FILTER_JOBS_BY_ORGANIZATION](state) {
-      const userStore = useUserStore()
-      if (!userStore.selectedOrganizations.length) 
-        return state.jobs
-      
-      return state.jobs.filter((job) => userStore.selectedOrganizations.includes(job.organization))
-    },
-    [FILTER_JOBS_BY_BY_JOB_TYPES](state) {
-      const userStore = useUserStore()
-      if (!userStore.selectedJobTypes.length) 
-        return state.jobs
-      
-      return state.jobs.filter((job) => userStore.selectedJobTypes.includes(job.jobType))
     },
     [INCLUDE_JOB_BY_ORGANIZATION]: () => (job) => {
       const userStore = useUserStore()
