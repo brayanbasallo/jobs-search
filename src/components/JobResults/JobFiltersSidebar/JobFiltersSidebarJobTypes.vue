@@ -44,6 +44,7 @@
       ...mapActions(useUserStore, [ADD_SELECTED_JOB_TYPES]),
       selectJobType() {
         this.ADD_SELECTED_JOB_TYPES(this.selectJobTypes)
+        this.$router.push({ name: "JobResults" })
       }
     }
   }
