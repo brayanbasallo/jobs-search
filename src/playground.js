@@ -1,24 +1,11 @@
-export const eventOrOdd = (num) => {
-    if (num % 2 === 0) {
-        return 'even';
-    }
-    return 'odd';
-}
-
-export const multiply = (a, b) =>  a * b;
+const { ref, computed } = require('vue');
 
 
-// ES6 map method on arrays
-// const numbers = [1, 2, 3, 4, 5];
-// const squares = numbers.map((number) => number * number );
-// console.log(squares);   
-// const names = ['Andrew', 'Jen', 'Jess'];
-// const lowercaseNames = names.map((name) => name.toLowerCase());
-// console.log(lowercaseNames);
+let a = ref(1);
+let b = ref(2);
 
-// dinamic object keys
-/* const favoriteFood = 'pizza';
-const goodFoods = {
-    [favoriteFood]: true,
-}
-console.log(goodFoods); */
+let c = computed(() => a.value + b.value);
+console.log(c.value);
+
+a.value = 8;
+console.log(c.value);
