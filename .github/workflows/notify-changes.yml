@@ -1,0 +1,58 @@
+name: Notify Changes on Production Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  notify-changes:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up git
+      run: |
+        git config --global user.email "basallo17@gmail.com"
+        git config --global user.name "Brayan Basallo Soto"
+
+    - name: Check if last-deploy tag exists
+      id: check_tag
+      run: |
+        if git rev-parse "last-deploy" >/dev/null 2>&1
+        then
+          echo "last-deploy tag exists."
+          echo "::set-output name=exists::true"
+        else
+          echo "last-deploy tag does not exist. Creating it."
+          git tag last-deploy
+          git push origin last-deploy
+          echo "::set-output name=exists::false"
+        fi
+
+    - name: Get list of changes since last deploy
+      if: steps.check_tag.outputs.exists == 'true'
+      run: git log --pretty=format:"%h - %s (%an, %ad)" --date=short last-deploy..HEAD > changes.txt
+
+    - name: Get initial commit details
+      if: steps.check_tag.outputs.exists != 'true'
+      run: echo "Initial deploy, no changes to list." > changes.txt
+
+    - name: Send notification to Slack
+      uses: 8398a7/action-slack@v3
+      with:
+        status: custom
+        fields: |
+          text: |
+            `Changes Deployed:`
+            ```$(cat changes.txt)```
+      env:
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+    - name: Update last deploy tag
+      if: success()
+      run: |
+        git tag -f last-deploy
+        git push origin last-deploy --force
