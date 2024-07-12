@@ -51,6 +51,10 @@ jobs:
     - name: Output changes for debugging
       run: cat changes.txt
 
+    - name: Set environment variable with changes
+      id: set-env
+      run: echo "CHANGES=$(cat changes.txt)" >> $GITHUB_ENV
+
     - name: Send notification to Slack
       uses: 8398a7/action-slack@v3
       with:
@@ -73,7 +77,7 @@ jobs:
                     "type": "section",
                     "text": {
                       "type": "mrkdwn",
-                      "text": "$(cat changes.txt)"
+                      "text": "${{ env.CHANGES }}"
                     }
                   }
                 ]
