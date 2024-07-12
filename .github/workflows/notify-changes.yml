@@ -58,6 +58,9 @@ jobs:
         echo '" }' >> payload.json
       shell: bash
 
+    - name: Verify payload.json
+      run: cat payload.json
+
     - name: Send notification to Slack
       uses: slackapi/slack-github-action@v1.26.0
       with:
