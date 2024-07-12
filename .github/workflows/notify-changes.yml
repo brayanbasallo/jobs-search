@@ -51,20 +51,35 @@ jobs:
     - name: Output changes for debugging
       run: cat changes.txt
 
-    - name: Create Slack payload
-      run: |
-        echo '{ "text": "Changes Deployed:\n' > payload.json
-        cat changes.txt >> payload.json
-        echo '" }' >> payload.json
-      shell: bash
-
-    - name: Verify payload.json
-      run: cat payload.json
-
     - name: Send notification to Slack
-      uses: slackapi/slack-github-action@v1.26.0
+      uses: 8398a7/action-slack@v3
       with:
-        payload-file-path: payload.json
+        status: custom
+        fields: workflow,job,commit,repo,ref,author,took
+        custom_payload: |
+          {
+            "attachments": [
+              {
+                "color": "#36a64f",
+                "blocks": [
+                  {
+                    "type": "section",
+                    "text": {
+                      "type": "mrkdwn",
+                      "text": "*Changes Deployed:*"
+                    }
+                  },
+                  {
+                    "type": "section",
+                    "text": {
+                      "type": "mrkdwn",
+                      "text": "$(cat changes.txt)"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
       env:
         SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
