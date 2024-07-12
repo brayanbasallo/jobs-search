@@ -30,8 +30,6 @@ jobs:
           echo "::set-output name=exists::true"
         else
           echo "last-deploy tag does not exist. Creating it."
-          git tag last-deploy
-          git push origin last-deploy
           echo "::set-output name=exists::false"
         fi
 
