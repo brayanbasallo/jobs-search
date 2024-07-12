@@ -51,14 +51,17 @@ jobs:
     - name: Output changes for debugging
       run: cat changes.txt
 
+    - name: Create Slack payload
+      run: |
+        echo '{ "text": "Changes Deployed:\n' > payload.json
+        cat changes.txt >> payload.json
+        echo '" }' >> payload.json
+      shell: bash
+
     - name: Send notification to Slack
-      id: slack
       uses: slackapi/slack-github-action@v1.26.0
       with:
-        payload: |
-          Changes Deployed:
-          value: $(cat changes.txt)
-
+        payload-file-path: payload.json
       env:
         SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
