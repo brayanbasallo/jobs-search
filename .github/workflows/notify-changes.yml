@@ -34,12 +34,22 @@ jobs:
         fi
 
     - name: Get list of changes since last deploy
+      id: changes
       if: steps.check_tag.outputs.exists == 'true'
       run: git log --pretty=format:"%h - %s (%an, %ad)" --date=short last-deploy..HEAD > changes.txt
 
     - name: Get initial commit details
       if: steps.check_tag.outputs.exists != 'true'
       run: echo "Initial deploy, no changes to list." > changes.txt
+
+    - name: Check if changes.txt is empty
+      run: |
+        if [ ! -s changes.txt ]; then
+          echo "No changes detected." > changes.txt
+        fi
+
+    - name: Output changes for debugging
+      run: cat changes.txt
 
     - name: Send notification to Slack
       uses: 8398a7/action-slack@v3.16.2
